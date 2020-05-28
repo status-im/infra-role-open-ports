@@ -1,8 +1,10 @@
 ---
-open_ports_protocol: 'tcp'
 open_ports_comment: ~
 open_ports_action: 'append'
 open_ports_chain: 'INPUT'
 open_ports_jump: 'ACCEPT'
 open_ports_source: '0.0.0.0/0'
 open_ports_list: []
+# Examples:
+# - { port: 1234, protocol: 'tcp' }
+# - { port: 4321, protocol: 'udp' }
