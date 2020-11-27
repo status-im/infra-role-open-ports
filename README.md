@@ -8,7 +8,8 @@ For a service running locally use:
 ```yaml
 open_ports_comment: 'Local service X'
 open_ports_list:
-  - { port: 443, protocol: 'tcp' }
+  - { port: 443,  protocol: 'tcp' }
+  - { port: 8001, protocol: 'tcp', interface: 'tun0' }
 ```
 For a docker service ports use:
 ```yaml

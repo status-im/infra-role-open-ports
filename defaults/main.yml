@@ -7,4 +7,5 @@ open_ports_source: '0.0.0.0/0'
 open_ports_list: []
 # Examples:
 # - { port: 1234, protocol: 'tcp' }
-# - { port: 4321, protocol: 'udp' }
+# - { port: 4321, protocol: 'udp', interface: 'tun0' }
+# When interface is undefined `any` is used.

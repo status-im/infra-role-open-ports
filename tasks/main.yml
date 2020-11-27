@@ -1,13 +1,14 @@
 ---
 - name: 'Enable ports in iptables'
   iptables:
-    comment: '{{ open_ports_comment | mandatory }} - {{ item | mandatory }}'
+    comment: '{{ open_ports_comment | mandatory }}'
     action:  '{{ open_ports_action | mandatory }}'
     chain: '{{ open_ports_chain | mandatory }}'
     jump: '{{ open_ports_jump | mandatory }}'
     source: '{{ open_ports_source | mandatory }}'
     protocol: '{{ item.protocol | mandatory }}'
     destination_port: '{{ item.port | string | mandatory }}'
+    in_interface: '{{ item.interface | default(omit) }}'
   with_items: '{{ open_ports_list | mandatory }}'
   loop_control:
     label:
