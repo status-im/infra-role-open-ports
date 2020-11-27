@@ -1,19 +1,18 @@
 ---
 - name: 'Enable ports in iptables'
   iptables:
-    comment: '{{ open_ports_comment | mandatory }}'
-    action:  '{{ open_ports_action | mandatory }}'
-    chain: '{{ open_ports_chain | mandatory }}'
-    jump: '{{ open_ports_jump | mandatory }}'
-    source: '{{ open_ports_source | mandatory }}'
-    protocol: '{{ item.protocol | mandatory }}'
-    destination_port: '{{ item.port | string | mandatory }}'
+    comment: '{{ item.comment | default(open_ports_default_comment) }}'
+    action:  '{{ item.action | default(open_ports_default_action) }}'
+    chain: '{{ item.chain | default(open_ports_default_chain) }}'
+    jump: '{{ item.jump | default(open_ports_default_jump) }}'
+    source: '{{ item.source | default(open_ports_default_source) }}'
+    protocol: '{{ item.protocol | default(open_ports_default_protocol) }}'
     in_interface: '{{ item.interface | default(omit) }}'
+    destination_port: '{{ item.port | string | mandatory }}'
   with_items: '{{ open_ports_list | mandatory }}'
   loop_control:
     label:
-      chain: '{{ open_ports_chain }}'
-      comment: '{{ open_ports_comment }}'
+      comment: '{{ item.comment | default(open_ports_default_comment) }}'
       protocol: '{{ item.protocol }}'
       port: '{{ item.port }}'
   notify:
