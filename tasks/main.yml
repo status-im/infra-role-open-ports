@@ -13,7 +13,7 @@
   loop_control:
     label:
       comment: '{{ item.comment | default(open_ports_default_comment) }}'
-      protocol: '{{ item.protocol }}'
-      port: '{{ item.port }}'
+      protocol: '{{ item.protocol | default(open_ports_default_protocol) }}'
+      port: '{{ item.port | mandatory }}'
   notify:
     - Save iptables rules
