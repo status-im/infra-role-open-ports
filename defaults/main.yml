@@ -5,8 +5,10 @@ open_ports_default_chain: 'INPUT'
 open_ports_default_jump: 'ACCEPT'
 open_ports_default_protocol: 'tcp'
 open_ports_default_source: '0.0.0.0/0'
+open_ports_default_ipset_flags: 'src'
 open_ports_list: []
 # Examples:
 # - { port: 1234, protocol: 'tcp' }
 # - { port: 4321, protocol: 'udp', interface: 'tun0' }
+# - { port: 4321, protocol: 'tcp', set: 'metrics.hq', set_flags: 'src' }
 # When interface is undefined `any` is used.

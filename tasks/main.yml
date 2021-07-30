@@ -8,12 +8,17 @@
     source: '{{ item.source | default(open_ports_default_source) }}'
     protocol: '{{ item.protocol | default(open_ports_default_protocol) }}'
     in_interface: '{{ item.interface | default(omit) }}'
-    destination_port: '{{ item.port | string | mandatory }}'
+    destination_port: '{{ item.port | default(omit) }}'
+    # Optional IP set as source filter
+    match_set: '{{ item.ipset | default(omit) }}'
+    match_set_flags: |-
+      {{ item.ipset_flags | default((item.ipset is defined)
+       | ternary(open_ports_default_ipset_flags, omit)) }}
   with_items: '{{ open_ports_list | mandatory }}'
   loop_control:
     label:
       comment: '{{ item.comment | default(open_ports_default_comment) }}'
-      protocol: '{{ item.protocol | default(open_ports_default_protocol) }}'
-      port: '{{ item.port | mandatory }}'
+      protocol: '{{ item.get("protocol") | default(open_ports_default_protocol) }}'
+      port: '{{ item.get("port") | string }}'
   notify:
     - Save iptables rules

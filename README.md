@@ -11,6 +11,7 @@ open_ports_list:
   - { port: 443,  protocol: 'tcp' }
   - { port: 8001, protocol: 'tcp', interface: 'tun0' }
   - { port: 9100, protocol: 'tcp', comment: 'Local service Y' }
+  - { port: 9200, protocol: 'tcp', ipset: 'metrics.hq' }
 ```
 For a docker service ports use:
 ```yaml
