@@ -17,8 +17,8 @@
   with_items: '{{ open_ports_list | mandatory }}'
   loop_control:
     label:
-      comment: '{{ item.comment | default(open_ports_default_comment) }}'
-      protocol: '{{ item.get("protocol") | default(open_ports_default_protocol) }}'
-      port: '{{ item.get("port") | string }}'
+      port: '{{ item.get("port") | mandatory | string }}'
+      protocol: '{{ item.get("protocol", open_ports_default_protocol) }}'
+      comment: '{{ item.get("comment", open_ports_default_comment) }}'
   notify:
     - Save iptables rules
