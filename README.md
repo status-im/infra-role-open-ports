@@ -21,6 +21,7 @@ open_ports_default_chain: 'DOCKER-USER'
 open_ports_list:
   - { port: 8080, protocol: 'tcp' }
   - { port: 8080, protocol: 'udp' }
+  - { port: 2220, protocol: 'tcp', state: 'absent' }
 ```
 __WARNING__: If you are opening a Docker container port, you need to open the one __in__ the container, no the one mapped on the host.
 

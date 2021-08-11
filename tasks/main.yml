@@ -1,6 +1,7 @@
 ---
 - name: 'Enable ports in iptables'
   iptables:
+    state: '{{ item.state | default(open_ports_default_state) }}'
     comment: '{{ item.comment | default(open_ports_default_comment) }}'
     action:  '{{ item.action | default(open_ports_default_action) }}'
     chain: '{{ item.chain | default(open_ports_default_chain) }}'
