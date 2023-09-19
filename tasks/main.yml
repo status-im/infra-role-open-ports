@@ -17,7 +17,9 @@
        | ternary(open_ports_default_ipset_flags, omit)) }}
   with_items: '{{ open_ports_list | mandatory }}'
   loop_control:
-    label:
+    label: '{{ loop_label }}'
+  vars:
+    loop_label:
       port: '{{ item.get("port") | mandatory | string }}'
       protocol: '{{ item.get("protocol", open_ports_default_protocol) }}'
       comment: '{{ item.get("comment", open_ports_default_comment) }}'
