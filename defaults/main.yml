@@ -10,6 +10,5 @@ open_ports_default_ipset_flags: 'src'
 open_ports_list: []
 # Examples:
 # - { port: 1234, protocol: 'tcp' }
-# - { port: 4321, protocol: 'udp', interface: 'tun0' }
+# - { port: 4321, protocol: 'udp', in_iface: 'tun0' }
 # - { port: 4321, protocol: 'tcp', set: 'metrics.hq', set_flags: 'src' }
-# When interface is undefined `any` is used.

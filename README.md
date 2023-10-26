@@ -9,7 +9,7 @@ For a service running locally use:
 open_ports_default_comment: 'Local service X'
 open_ports_list:
   - { port: 443,  protocol: 'tcp' }
-  - { port: 8001, protocol: 'tcp', interface: 'tun0' }
+  - { port: 8001, protocol: 'tcp', in_iface: 'tun0' }
   - { port: 9100, protocol: 'tcp', comment: 'Local service Y' }
   - { port: 9200, protocol: 'tcp', ipset: 'metrics.hq' }
 ```
