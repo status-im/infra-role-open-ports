@@ -1,5 +1,4 @@
 ---
-open_ports_default_comment: ~
 open_ports_default_state: 'present'
 open_ports_default_action: 'append'
 open_ports_default_chain: 'INPUT'
