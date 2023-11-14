@@ -7,7 +7,7 @@
     jump:             '{{ item.jump       | default(open_ports_default_jump) }}'
     source:           '{{ item.source     | default(open_ports_default_source) }}'
     protocol:         '{{ item.protocol   | default(open_ports_default_protocol) }}'
-    comment:          '{{ item.comment    | default(omit) }}'
+    comment:          '{{ item.comment    | default(open_ports_default_comment) | mandatory }}'
     in_interface:     '{{ item.in_iface   | default(omit) }}'
     out_interface:    '{{ item.out_ifrace | default(omit) }}'
     destination_port: '{{ item.port       | default(omit) }}'
