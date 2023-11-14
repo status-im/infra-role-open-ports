@@ -1,13 +1,9 @@
 ---
-open_ports_default_state: 'present'
-open_ports_default_action: 'append'
-open_ports_default_chain: 'INPUT'
-open_ports_default_jump: 'ACCEPT'
+open_ports_default_verdict: 'accept' # accept, drop, queue, continue, return, jump, goto
 open_ports_default_protocol: 'tcp'
-open_ports_default_source: '0.0.0.0/0'
-open_ports_default_ipset_flags: 'src'
-open_ports_list: []
-# Examples:
-# - { port: 1234, protocol: 'tcp' }
-# - { port: 4321, protocol: 'udp', in_iface: 'tun0' }
-# - { port: 4321, protocol: 'tcp', set: 'metrics.hq', set_flags: 'src' }
+open_ports_list: {}
+#  service-a:
+#    - { port: 1234, comment: 'gRPC' }
+#  service-b:
+#    - { port: 4321, protocol: 'udp',  comment: 'API' }
+#    - { port: 8765, in_iface: 'tun0', comment: 'Metrics' }

@@ -1,0 +1,12 @@
+{%- for rule in service.value -%}
+{%- if not rule.get("disabled", false) -%}
+  {%- if rule.in_iface is defined  -%}iifname {{ rule.in_iface }} {% endif -%}
+  {%- if rule.out_iface is defined -%}oifname {{ rule.in_iface }} {% endif -%}
+  {%- if rule.source is defined    -%}saddr {{ rule.source }} {% endif -%}
+  {%- if rule.port is defined      -%}
+  {{- rule.protocol | default(open_ports_default_protocol) -}}
+    {%- if rule.port is iterable %} dport { {{ rule.port | join(", ") }} } {% else -%}dport {{- rule.port -}} {% endif -%}
+  {%- endif %}
+{{ rule.verdict | default(open_ports_default_verdict) }} comment {{ rule.comment | default(open_ports_default_comment) | mandatory }}
+{% endif -%}
+{%- endfor %}
