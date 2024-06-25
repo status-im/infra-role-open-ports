@@ -1,0 +1,16 @@
+---
+- name: 'Enable ports in nftables'
+  template:
+    src:  'rules.nft'
+    dest: '/etc/nft.conf.d/services/{{ service.key }}.nft'
+    mode: 0644
+  with_dict: '{{ open_ports_list | mandatory }}'
+  loop_control:
+    loop_var: 'service'
+    label: '{{ service.key }}'
+  notify:
+    - Reload nftables
+
+- name: 'Verify config validity'
+  command: |
+    nft --check --file /etc/nftables.conf

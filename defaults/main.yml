@@ -1,4 +1,9 @@
 ---
+# By defaylt we should be using iptables for now.
+open_ports_nftables: '{{ bootstrap__firewall_nftables | default(False) }}'
+
+# IPTables
+#open_ports_default_comment: 'Reason for rule'
 open_ports_default_state: 'present'
 open_ports_default_action: 'append'
 open_ports_default_chain: 'INPUT'
@@ -11,3 +16,15 @@ open_ports_list: []
 # - { port: 1234, protocol: 'tcp' }
 # - { port: 4321, protocol: 'udp', in_iface: 'tun0' }
 # - { port: 4321, protocol: 'tcp', set: 'metrics.hq', set_flags: 'src' }
+
+# NFTables
+open_ports_default_verdict: 'accept' # accept, drop, queue, continue, return, jump, goto
+#open_ports_default_iifname: 'wg0'
+#open_ports_list: {}
+#  service-a:
+#    - { port: 1234, comment: 'gRPC' }
+#  service-b:
+#    - { port: 4321, protocol: 'udp',       comment: 'API' }
+#    - { port: 8765, in_iface: 'tun0',      comment: 'Metrics' }
+#    - { port: 9753, source: '@metrics.hq', comment: 'Metrics' }
+#    - { port: 9642, ipset:'metrics.hq',    comment: 'Metrics' }

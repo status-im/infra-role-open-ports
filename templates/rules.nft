@@ -1,0 +1,24 @@
+#!/usr/sbin/nft -f
+# Managed with Ansible: infra-role-open-ports
+{% for rule in service.value -%}
+{%- if rule is string -%}
+{{ rule }}
+{%- else -%}
+{%- if not rule.get("disabled", false) -%}
+  {%- if rule.iif is defined and rule.iifname is defined -%}{{- DUMMY | mandatory("Using both iif and iifname not allowed!") -}}{%- endif -%}
+  {%- if rule.oif is defined and rule.oifname is defined -%}{{- DUMMY | mandatory("Using both oif and oifname not allowed!") -}}{%- endif -%}
+  {%- if rule.iif     is defined -%}iif {{ rule.iif }} {% endif -%}
+  {%- if rule.oif     is defined -%}oif {{ rule.oif }} {% endif -%}
+  {%- if rule.iifname is defined -%}iifname {{ rule.iifname }} {% endif -%}
+  {%- if rule.oifname is defined -%}oifname {{ rule.oifname }} {% endif -%}
+  {%- if rule.source  is defined and rule.ipset is defined -%}{{- DUMMY | mandatory("Using both source and ipset not allowed!") -}}{%- endif -%}
+  {%- if rule.source  is defined -%}ip saddr {{ rule.source }} {% endif -%}
+  {%- if rule.ipset   is defined -%}ip saddr @{{ rule.ipset }} {% endif -%}
+  {%- if rule.port    is defined -%}
+{{- rule.protocol | default(open_ports_default_protocol) -}}
+      {% if rule.port.__class__.__name__ == "list" %} dport { {{ rule.port | join(", ") }} } {%- else %} dport {{ rule.port }} {%- endif -%}
+    {%- endif %}
+ {{ rule.verdict | default(open_ports_default_verdict) }} comment "{{ rule.comment | default(open_ports_default_comment) | mandatory }}"
+{% endif -%}
+{%- endif -%}
+{%- endfor %}
