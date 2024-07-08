@@ -13,6 +13,7 @@
   {%- if rule.oifname is defined -%}oifname {{ rule.oifname }} {% endif -%}
   {%- if rule.source  is defined and rule.ipset is defined -%}{{- DUMMY | mandatory("Using both source and ipset not allowed!") -}}{%- endif -%}
   {%- if rule.source  is defined -%}ip saddr {{ rule.source }} {% endif -%}
+  {%- if rule.dest    is defined -%}ip daddr {{ rule.dest }} {% endif -%}
   {%- if rule.ipset   is defined -%}ip saddr @{{ rule.ipset }} {% endif -%}
   {%- if rule.port    is defined -%}
 {{- rule.protocol | default(open_ports_default_protocol) -}}
