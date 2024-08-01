@@ -1,4 +1,12 @@
 ---
+- name: 'Create folder for service rules'
+  file:
+    path:  '/etc/nft.conf.d/services'
+    owner: 'root'
+    group: 'root'
+    mode:  '0755'
+    state: 'directory'
+
 - name: 'Enable ports in nftables'
   template:
     src:  'rules.nft'
