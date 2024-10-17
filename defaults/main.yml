@@ -1,6 +1,6 @@
 ---
 # By defaylt we should be using iptables for now.
-open_ports_nftables: '{{ bootstrap__firewall_nftables | default(False) }}'
+open_ports_nftables: True
 
 # IPTables
 #open_ports_default_comment: 'Reason for rule'
