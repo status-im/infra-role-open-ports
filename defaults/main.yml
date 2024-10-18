@@ -1,24 +1,7 @@
 ---
-# By defaylt we should be using iptables for now.
-open_ports_nftables: True
-
-# IPTables
-#open_ports_default_comment: 'Reason for rule'
-open_ports_default_state: 'present'
-open_ports_default_action: 'append'
-open_ports_default_chain: 'INPUT'
-open_ports_default_jump: 'ACCEPT'
-open_ports_default_protocol: 'tcp'
-open_ports_default_source: '0.0.0.0/0'
-open_ports_default_ipset_flags: 'src'
-open_ports_list: []
-# Examples:
-# - { port: 1234, protocol: 'tcp' }
-# - { port: 4321, protocol: 'udp', in_iface: 'tun0' }
-# - { port: 4321, protocol: 'tcp', set: 'metrics.hq', set_flags: 'src' }
-
 # NFTables
 open_ports_default_verdict: 'accept' # accept, drop, queue, continue, return, jump, goto
+open_ports_default_protocol: 'tcp'
 #open_ports_default_iifname: 'wg0'
 #open_ports_list: {}
 #  service-a:

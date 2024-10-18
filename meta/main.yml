@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Jakub Sokolowski <jakub@status.im>
-  description: Open ports using iptables rules
+  description: Open ports using nftables rules
   company: Status.im
   license: MIT
   min_ansible_version: 1.9
