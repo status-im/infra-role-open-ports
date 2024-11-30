@@ -9,5 +9,5 @@ open_ports_default_protocol: 'tcp'
 #  service-b:
 #    - { port: 4321, protocol: 'udp',       comment: 'API' }
 #    - { port: 8765, in_iface: 'tun0',      comment: 'Metrics' }
-#    - { port: 9753, source: '@metrics.hq', comment: 'Metrics' }
-#    - { port: 9642, ipset:'metrics.hq',    comment: 'Metrics' }
+#    - { port: 9753, source: '@hq.metrics', comment: 'Metrics' }
+#    - { port: 9642, ipset:   'hq.metrics', comment: 'Metrics' }
