@@ -16,9 +16,12 @@
   loop_control:
     loop_var: 'service'
     label: '{{ service.key }}'
-  notify:
-    - Reload nftables
 
 - name: 'Verify config validity'
   command: |
     nft --check --file /etc/nftables.conf
+
+- name: Reload nftables
+  service:
+    name:  'nftables'
+    state: 'reloaded'
