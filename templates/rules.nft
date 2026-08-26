@@ -17,7 +17,7 @@
   {%- if rule.ipset   is defined -%}ip saddr @{{ rule.ipset }} {% endif -%}
   {%- if rule.port    is defined -%}
 {{- rule.protocol | default(open_ports_default_protocol) -}}
-      {% if rule.port.__class__.__name__ == "list" %} dport { {{ rule.port | join(", ") }} } {%- else %} dport {{ rule.port }} {%- endif -%}
+      {% if (rule.port|type_debug) == "list" %} dport { {{ rule.port | join(", ") }} } {%- else %} dport {{ rule.port }} {%- endif -%}
     {%- endif %}
  {{ rule.verdict | default(open_ports_default_verdict) }} comment "{{ rule.comment | default(open_ports_default_comment) | mandatory }}"
 {% endif -%}
