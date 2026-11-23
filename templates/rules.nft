@@ -16,8 +16,8 @@
   {%- if rule.dest    is defined -%}ip daddr {{ rule.dest }} {% endif -%}
   {%- if rule.ipset   is defined -%}ip saddr @{{ rule.ipset }} {% endif -%}
   {%- if rule.port    is defined -%}
-{{- rule.protocol | default(open_ports_default_protocol) -}}
-      {% if (rule.port|type_debug) == "list" %} dport { {{ rule.port | join(", ") }} } {%- else %} dport {{ rule.port }} {%- endif -%}
+meta l4proto {{ rule.protocol | default(open_ports_default_protocol) }} ct original proto-dst
+      {%- if (rule.port|type_debug) == "list" %} { {{ rule.port | join(", ") }} } {%- else %} {{ rule.port }} {%- endif -%}
     {%- endif %}
  {{ rule.verdict | default(open_ports_default_verdict) }} comment "{{ rule.comment | default(open_ports_default_comment) | mandatory }}"
 {% endif -%}
